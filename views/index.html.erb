@@ -26,8 +26,13 @@
                 	<% director_details.each do |director_detail| %>
                 		<% director = JSON.parse(director_detail["data"]) %>
 	                    <tr>
-	                        <td><%= director_detail["din_no"] %></td>
-	                        <td><a href="/director_detail?din_no=<%=director_detail["din_no"] %>"><%= director["return"]["companyOrg1"] %></a></td>
+	                    	<% if director_detail["din_no"].present? %>
+	                        	<td><%= director_detail["din_no"] %></td>
+	                        	<td><a href="/director_detail?din_no=<%=director_detail["din_no"]%>&db=<%=db%>"><%= director["return"]["companyOrg1"] %></a></td>
+	                        <% else %>
+	                        	<td><%= director_detail["id"] %></td>
+	                        	<td><a href="/director_detail?id=<%=director_detail["id"]%>&db=<%=db%>"><%= director["return"]["companyOrg1"] %></a></td>
+	                       	<% end %>
 	                    </tr>
 	                <% end %>
                 </tbody>
